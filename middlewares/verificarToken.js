@@ -1,19 +1,22 @@
-import jwt from 'jsonwebtoken'
 
-const verificarToken = (req, res, next)  => {
-    cotoken = req.header('Authorization')?.split(" ")[1]
+import jwt from 'jsonwebtoken';
 
-    if (!token)  {
-        return res.status(401).json({ message: 'Acceso denegado. No se proporcionó ningun token'})
-    }
+const verificarToken = (req, res, next) => {
+  const authHeader = req.header('Authorization');
 
-    try {
-        const verificado = jwt.verify(token, process.env.JWT_SECRET)
-        req.usuario = verificado
-        next()
-    } catch (error) {
-        res.status(400).json({ message: 'Token invalidio'})
-    }
-}
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ message: 'Token faltante o inválido' });
+  }
+
+  const token = authHeader.split(' ')[1];
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    res.status(403).json({ message: 'Token inválido' });
+  }
+};
 
 export default verificarToken;

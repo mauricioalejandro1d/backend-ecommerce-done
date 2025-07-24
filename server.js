@@ -7,6 +7,7 @@ import userRoutes from './routes/userRoutes.js';
 import ordenesRouter from './routes/ordenes.js';
 import authRoutes from './routes/authRoutes.js';
 
+
 dotenv.config();
 
 connectDB();
@@ -20,6 +21,7 @@ app.use('/api/users', userRoutes);
 app.use('/uploads', express.static('uploads'));
 app.use("/api/ordenes", ordenesRouter);
 app.use('/api/auth', authRoutes);
+app.use(express.urlencoded({ extended: true }));
 
 
 app.get('/', (req, res) => {

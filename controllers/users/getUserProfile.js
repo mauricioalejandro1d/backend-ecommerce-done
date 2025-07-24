@@ -1,6 +1,7 @@
-import User from '../../models/User.js';
+import User from '../../models/userModel.js';
 
-export default async (req, res) => {
+export default async function getUserProfile(req, res) {
+  console.log('🧪 Middleware pasó. ID decodificado:', req.user);
   try {
     const user = await User.findById(req.user.id).select('-password');
     if (!user) {
@@ -8,7 +9,7 @@ export default async (req, res) => {
     }
     res.json(user);
   } catch (error) {
-    console.error(error);
-res.status(500).json({ message: 'Error al obtener perfil', error: error.message });
+    console.error('🔥 Error al obtener perfil:', error);
+    res.status(500).json({ message: 'Error del servidor' });
   }
-};
+}

@@ -1,14 +1,10 @@
-import getUsers from './users/getUsers.js';
-export { getUsers };
-import getUserById from './users/getUserById.js';
-export { getUserById };
-import registerUser from './users/registerUser.js';
-export { registerUser };
-import loginUser from './users/loginUser.js';
-export { loginUser };
-import updateUser from './users/updateUser.js';
-export { updateUser };
-import deleteUser from './users/deleteUser.js';
-export { deleteUser };
-import getUserProfile from './users/getUserProfile.js';
-export { getUserProfile };
+export { default as getUsers } from './users/getUsers.js';
+export { default as getUserById } from './users/getUserById.js';
+export { default as registerUser } from './users/registerUser.js';
+export { default as loginUser } from './users/loginUser.js';
+export { default as updateUser } from './users/updateUser.js';
+export { default as deleteUser } from './users/deleteUser.js';
+export { default as getUserProfile } from './users/getUserProfile.js';
+
+
+
